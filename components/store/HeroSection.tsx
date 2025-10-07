@@ -2,10 +2,12 @@
 import { motion, useScroll, useTransform } from 'framer-motion'
 import Link from 'next/link'
 import { FiArrowRight, FiPlay, FiStar, FiTrendingUp, FiAward } from 'react-icons/fi'
-import { useRef } from 'react'
+import { useRef, useEffect, useState } from 'react'
 
 export default function HeroSection() {
   const ref = useRef(null)
+  const [mounted, setMounted] = useState(false)
+  
   const { scrollYProgress } = useScroll({
     target: ref,
     offset: ['start start', 'end start'],
@@ -13,6 +15,11 @@ export default function HeroSection() {
 
   const y = useTransform(scrollYProgress, [0, 1], ['0%', '50%'])
   const opacity = useTransform(scrollYProgress, [0, 1], [1, 0])
+
+  // Only run on client side
+  useEffect(() => {
+    setMounted(true)
+  }, [])
 
   return (
     <section ref={ref} className="relative min-h-screen overflow-hidden bg-gradient-to-br from-gray-900 via-primary-900 to-accent-900">
@@ -49,13 +56,13 @@ export default function HeroSection() {
           className="absolute right-1/4 top-1/4 w-64 h-64 bg-blue-500 rounded-full blur-3xl opacity-10"
         />
 
-        {/* Floating Particles */}
-        {[...Array(20)].map((_, i) => (
+        {/* Floating Particles - Only render on client side */}
+        {mounted && [...Array(20)].map((_, i) => (
           <motion.div
             key={i}
             initial={{ 
-              x: Math.random() * window.innerWidth,
-              y: Math.random() * window.innerHeight,
+              x: typeof window !== 'undefined' ? Math.random() * window.innerWidth : Math.random() * 1000,
+              y: typeof window !== 'undefined' ? Math.random() * window.innerHeight : Math.random() * 800,
             }}
             animate={{
               y: [0, -30, 0],
