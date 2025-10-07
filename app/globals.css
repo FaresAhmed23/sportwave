@@ -1,0 +1,50 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  background-color: #f9fafb;
+  color: #111827;
+}
+
+/* Button Styles */
+.btn-primary {
+  @apply bg-primary-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-primary-700 transition-colors shadow-sm;
+}
+
+.btn-secondary {
+  @apply bg-white text-primary-600 px-6 py-3 rounded-lg font-semibold border-2 border-primary-600 hover:bg-primary-50 transition-colors;
+}
+
+.btn-ghost {
+  @apply text-gray-600 px-4 py-2 rounded-lg font-medium hover:bg-gray-100 transition-colors;
+}
+
+/* Form Styles */
+.input-field {
+  @apply w-full border border-gray-300 rounded-lg px-4 py-2.5 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all;
+}
+
+/* Card Styles */
+.card {
+  @apply bg-white rounded-xl shadow-sm hover:shadow-md transition-shadow;
+}
+
+/* Gradient Styles */
+.gradient-primary {
+  @apply bg-gradient-to-r from-primary-600 to-accent-600;
+}
+
+.gradient-text {
+  @apply bg-clip-text text-transparent bg-gradient-to-r from-primary-600 to-accent-600;
+}
+
+@keyframes heartBeat {
+  0%, 100% { transform: scale(1); }
+  25% { transform: scale(1.2); }
+  50% { transform: scale(1); }
+}
+
+.heart-animation {
+  animation: heartBeat 0.3s ease-in-out;
+}
